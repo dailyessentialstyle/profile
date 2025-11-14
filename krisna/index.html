@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nama Kamu — CV / Portofolio</title>
+
+  <!-- Tailwind Play CDN (fast for prototypes) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --accent-1: #6F5B01; /* earthy */
+      --accent-2: #FF6918; /* orange */
+    }
+    @media print{.no-print{display:none!important}}
+    .focus-ring:focus{outline:4px solid rgba(111,91,1,0.12);outline-offset:4px}
+    .blob-1{animation:moveA 10s ease-in-out infinite}
+    .blob-2{animation:moveB 14s ease-in-out infinite}
+    @keyframes moveA{0%{transform:translateY(0) translateX(0) scale(1)}50%{transform:translateY(-18px) translateX(12px) scale(1.05)}100%{transform:translateY(0) translateX(0) scale(1)}}
+    @keyframes moveB{0%{transform:translateY(0) translateX(0) scale(1)}50%{transform:translateY(22px) translateX(-18px) scale(0.98)}100%{transform:translateY(0) translateX(0) scale(1)}}
+    .reveal{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+  </style>
+</head>
+<body class="antialiased text-slate-800 bg-white">
+  <svg class="pointer-events-none fixed left-0 top-0 -z-10 w-[80vw] max-w-xl opacity-30 blob-1" width="800" height="600" viewBox="0 0 800 600" fill="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="g1" x1="0" x2="1">
+        <stop offset="0" stop-color="var(--accent-1)" />
+        <stop offset="1" stop-color="var(--accent-2)" />
+      </linearGradient>
+    </defs>
+    <path d="M120 40C220 -20 340 10 420 80C520 160 560 260 500 340C440 420 320 480 200 440C80 400 20 160 120 40Z" fill="url(#g1)" opacity="0.12"></path>
+  </svg>
+
+  <svg class="pointer-events-none fixed right-0 bottom-0 -z-10 w-[70vw] max-w-lg opacity-20 blob-2" width="700" height="500" viewBox="0 0 700 500" fill="none" aria-hidden="true">
+    <path d="M560 80C640 160 620 280 520 340C420 400 300 420 200 360C100 300 40 160 120 80C200 0 420 0 560 80Z" fill="var(--accent-2)" opacity="0.08"></path>
+  </svg>
+
+  <main class="max-w-5xl mx-auto px-6 py-12 lg:py-20">
+    <div class="bg-white shadow-lg rounded-2xl overflow-hidden border border-slate-100">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 p-6 lg:p-10">
+
+        <aside class="lg:col-span-1 space-y-6">
+          <div class="flex items-center gap-4">
+            <div id="avatar" class="w-20 h-20 rounded-xl flex items-center justify-center text-xl font-semibold text-white" style="background:linear-gradient(135deg,var(--accent-1),var(--accent-2))">DE</div>
+            <div>
+              <h1 id="name" class="text-2xl font-semibold">Nama Depan Nama Belakang</h1>
+              <p id="title" class="text-sm text-slate-500 mt-1">Posisi yang Dilamar — Contoh: Desainer Hijab</p>
+              <div id="location" class="text-xs text-slate-400 mt-1">Kota • Indonesia</div>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div id="about" class="text-sm text-slate-600">Deskripsi singkat tentang kamu. Contoh: Saya desainer produk dengan 3 tahun pengalaman membuat koleksi hijab yang ramah pengguna dan estetis. Fokus pada kualitas jahit dan tren pasar.</div>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="text-sm font-medium text-slate-700">Contact</h3>
+            <a id="email" href="mailto:email@domain.com" class="block text-sm text-slate-600 hover:underline">📧 email@domain.com</a>
+            <a id="phone" href="tel:+6281234567890" class="block text-sm text-slate-600 hover:underline">📱 +62 812 3456 7890</a>
+            <a id="website" href="#" class="block text-sm text-slate-600 hover:underline">🔗 dailyessentialstyle.github.io/profile</a>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-medium text-slate-700">Skills</h3>
+            <div id="skills" class="mt-2 flex flex-wrap gap-2">
+              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Desain</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Photoshop</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Ilustrasi</span>
+              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Manajemen Produk</span>
+            </div>
+          </div>
+
+          <div class="flex gap-3 mt-2 no-print">
+            <button class="print-btn focus-ring px-4 py-2 rounded-lg text-sm font-semibold" onclick="window.print()" style="background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:white">Cetak / Simpan PDF</button>
+            <button class="copy-btn px-4 py-2 rounded-lg text-sm border border-slate-200" onclick="copyURL()">Copy Link</button>
+          </div>
+        </aside>
+
+        <section class="lg:col-span-3 space-y-6">
+
+          <div class="reveal p-4 lg:p-6 bg-white rounded-xl border border-slate-100">
+            <h2 class="text-lg font-semibold text-slate-800">Experience</h2>
+
+            <article class="mt-4 space-y-3">
+              <div class="p-4 rounded-lg bg-gradient-to-r from-slate-50 to-white border border-slate-100">
+                <h3 class="font-medium">Desainer Produk — Nama Perusahaan</h3>
+                <div class="text-xs text-slate-400">Jan 2022 — Sekarang • Kota</div>
+                <p class="text-sm text-slate-600 mt-2">Ringkasan tugas dan pencapaian (apa yang kamu lakukan dan hasilnya).</p>
+              </div>
+
+              <div class="p-4 rounded-lg bg-slate-50 border border-slate-100">
+                <h3 class="font-medium">Freelance — Desainer</h3>
+                <div class="text-xs text-slate-400">2019 — 2021</div>
+                <p class="text-sm text-slate-600 mt-2">Proyek-proyek penting: katalog, branding, photoshoot.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="reveal p-4 lg:p-6 bg-white rounded-xl border border-slate-100">
+            <h2 class="text-lg font-semibold text-slate-800">Education</h2>
+            <div class="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
+              <h3 class="font-medium">Nama Universitas / Sekolah</h3>
+              <div class="text-xs text-slate-400">2015 — 2019</div>
+              <p class="text-sm text-slate-600 mt-2">Jurusan — Keterangan singkat.</p>
+            </div>
+          </div>
+
+          <div class="reveal p-4 lg:p-6 bg-white rounded-xl border border-slate-100">
+            <div class="flex items-center justify-between">
+              <h2 class="text-lg font-semibold text-slate-800">Portfolio</h2>
+              <div class="text-sm text-slate-500">Klik untuk lihat detail</div>
+            </div>
+
+            <div id="projects" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            </div>
+          </div>
+
+          <footer class="text-sm text-slate-500">Ingin menampilkan QR di kartu nama? Ganti teks di field "website" jadi URL GitHub Pages kamu lalu gunakan layanan QR generator (banyak yang gratis) untuk membuat gambar QR. Contoh: https://dailyessentialstyle.github.io/profile</footer>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const data = {
+      initials: 'DE',
+      name: 'DES — Daily Essential',
+      title: 'Founder & Product Designer',
+      location: 'Jakarta, Indonesia',
+      email: 'halo@dailyessentialstyle.com',
+      phone: '+62 812 3456 7890',
+      website: 'https://dailyessentialstyle.github.io/profile',
+      about: 'Saya membuat koleksi hijab dengan pendekatan fungsional dan estetis. Fokus pada material, jahitan, dan presentasi produk.',
+      skills: ['Desain Produk','Pattern Making','Branding','Photoshop','Adobe Illustrator'],
+      projects: [
+        {title:'Koleksi Hijab Satin 2025', desc:'Desain, sample, dan katalog produk.'},
+        {title:'Branding Toko Online', desc:'Konsep visual & assets promosi.'},
+        {title:'Lookbook Ramadan', desc:'Styling, foto, dan layout.'},
+      ]
+    }
+
+    document.getElementById('avatar').textContent = data.initials;
+    document.getElementById('name').textContent = data.name;
+    document.getElementById('title').textContent = data.title;
+    document.getElementById('location').textContent = data.location;
+    document.getElementById('email').textContent = '📧 ' + data.email; document.getElementById('email').href = 'mailto:' + data.email;
+    document.getElementById('phone').textContent = '📱 ' + data.phone; document.getElementById('phone').href = 'tel:' + data.phone.replaceAll(' ','');
+    document.querySelector('#website').textContent = '🔗 ' + data.website; document.querySelector('#website').href = data.website;
+    document.getElementById('about').textContent = data.about;
+
+    const skillsEl = document.getElementById('skills'); skillsEl.innerHTML = '';
+    data.skills.forEach(s=>{ const sp = document.createElement('span'); sp.className='text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700'; sp.textContent = s; skillsEl.appendChild(sp); });
+
+    const projectsEl = document.getElementById('projects'); projectsEl.innerHTML = '';
+    data.projects.forEach(p=>{
+      const card = document.createElement('a');
+      card.className = 'block p-4 rounded-xl border border-slate-100 bg-white hover:shadow-lg transition transform hover:-translate-y-1 focus-ring';
+      card.href = '#';
+      card.innerHTML = '<h4 class="font-medium text-slate-800">' + p.title + '</h4><p class="text-sm text-slate-500 mt-2">' + p.desc + '</p>';
+      projectsEl.appendChild(card);
+    });
+
+    function copyURL(){
+      navigator.clipboard.writeText(data.website).then(()=>{
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Link Disalin';
+        setTimeout(()=>btn.textContent = 'Copy Link',1500);
+      });
+    }
+
+    window.copyURL = copyURL;
+
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
+    },{threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+
+    document.addEventListener('keydown',(e)=>{ if(e.key === 'Tab'){ document.body.classList.remove('no-focus') }});
+
+  </script>
+</body>
+</html>
