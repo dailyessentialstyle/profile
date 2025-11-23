@@ -1,186 +1,451 @@
 <!doctype html>
 <html lang="id">
+
 <head>
+  <!-- Oleh : Tim Dukungan TI Daily Essential Style Indonesia Divisi Internet dan Situs Jejaring -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nama Kamu — CV / Portofolio</title>
+  <title>Syahifatul Fikri - Daily Essential Style Indonesia</title>
 
-  <!-- Tailwind Play CDN (fast for prototypes) -->
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (dev CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    :root{
-      --accent-1: #6F5B01; /* earthy */
-      --accent-2: #FF6918; /* orange */
+    :root {
+      --bg-1: #edf2f7;
+      /* light page */
+      --bg-2: #fafafa;
+      --text: #1f2937;
+      /* slate-800 */
+      --muted: #64748b;
+      /* slate-500 */
+      --glass: rgba(255, 255, 255, 0.45);
+      --glass-2: rgba(255, 255, 255, 0.10);
+      --border: rgba(255, 255, 255, 0.35);
+      --accent-1: #6F5B01;
+      /* earthy */
+      --accent-2: #FF6918;
+      /* orange */
+      --aura-white: rgba(255, 255, 255, 0.28);
+      --aura-orange: rgba(255, 105, 24, 0.18);
     }
-    @media print{.no-print{display:none!important}}
-    .focus-ring:focus{outline:4px solid rgba(111,91,1,0.12);outline-offset:4px}
-    .blob-1{animation:moveA 10s ease-in-out infinite}
-    .blob-2{animation:moveB 14s ease-in-out infinite}
-    @keyframes moveA{0%{transform:translateY(0) translateX(0) scale(1)}50%{transform:translateY(-18px) translateX(12px) scale(1.05)}100%{transform:translateY(0) translateX(0) scale(1)}}
-    @keyframes moveB{0%{transform:translateY(0) translateX(0) scale(1)}50%{transform:translateY(22px) translateX(-18px) scale(0.98)}100%{transform:translateY(0) translateX(0) scale(1)}}
-    .reveal{opacity:0;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease}
-    .reveal.visible{opacity:1;transform:none}
+
+    /* DARK THEME VARIABLES */
+    [data-theme="dark"] {
+      --bg-1: #0b1220;
+      /* dark page */
+      --bg-2: #071124;
+      --text: #e6eef6;
+      /* light text */
+      --muted: #9aa7b8;
+      --glass: rgba(6, 10, 17, 0.48);
+      --glass-2: rgba(255, 255, 255, 0.02);
+      --border: rgba(255, 255, 255, 0.06);
+      --aura-white: rgba(255, 255, 255, 0.04);
+      --aura-orange: rgba(255, 105, 24, 0.08);
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    /* NAV glass */
+    .nav-glass {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.25));
+      backdrop-filter: blur(12px) saturate(140%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    [data-theme="dark"] .nav-glass {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+    }
+
+    /* CARD / GLASS */
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+    }
+
+    .glass-2 {
+      background: var(--glass-2);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    /* Buttons */
+    .btn-glass {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.2));
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+    }
+
+    .btn-glass:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 26px rgba(2, 6, 23, 0.08);
+    }
+
+    [data-theme="dark"] .btn-glass {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+    }
+
+    /* Floating aura (left / right) */
+    .aura-1,
+    .aura-2 {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(120px);
+      transform: translateZ(0);
+      pointer-events: none;
+      opacity: 1;
+    }
+
+    .aura-1 {
+      width: 520px;
+      height: 520px;
+      left: 4%;
+      top: 6%;
+      background: var(--aura-white);
+      animation: floatA 10s ease-in-out infinite;
+    }
+
+    .aura-2 {
+      width: 640px;
+      height: 640px;
+      right: 3%;
+      bottom: 6%;
+      background: var(--aura-orange);
+      animation: floatB 12s ease-in-out infinite;
+      opacity: 0.9;
+    }
+
+    @keyframes floatA {
+      0% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-22px)
+      }
+
+      100% {
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes floatB {
+      0% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(18px)
+      }
+
+      100% {
+        transform: translateY(0)
+      }
+    }
+
+    /* hero image */
+    .hero-img {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 14px 40px rgba(2, 6, 23, 0.12);
+    }
+
+
+    /* reveal (scroll) animation base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s cubic-bezier(.2, .9, .2, 1), transform .7s cubic-bezier(.2, .9, .2, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* image hover zoom */
+    .img-zoom {
+      transition: transform .4s ease;
+    }
+
+    .img-zoom:hover {
+      transform: scale(1.06) translateZ(0);
+    }
+
+    /* responsive tweaks */
+    @media (max-width:1024px) {
+      .hero-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .aura-1,
+      .aura-2,
+      .img-zoom,
+      .btn-glass {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        transition: none !important;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* small utility */
+    .muted {
+      color: var(--muted);
+    }
+
+    .accent-pill {
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      color: white;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .topbar-toggle {
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+    }
   </style>
 </head>
-<body class="antialiased text-slate-800 bg-white">
-  <svg class="pointer-events-none fixed left-0 top-0 -z-10 w-[80vw] max-w-xl opacity-30 blob-1" width="800" height="600" viewBox="0 0 800 600" fill="none" aria-hidden="true">
-    <defs>
-      <linearGradient id="g1" x1="0" x2="1">
-        <stop offset="0" stop-color="var(--accent-1)" />
-        <stop offset="1" stop-color="var(--accent-2)" />
-      </linearGradient>
-    </defs>
-    <path d="M120 40C220 -20 340 10 420 80C520 160 560 260 500 340C440 420 320 480 200 440C80 400 20 160 120 40Z" fill="url(#g1)" opacity="0.12"></path>
-  </svg>
 
-  <svg class="pointer-events-none fixed right-0 bottom-0 -z-10 w-[70vw] max-w-lg opacity-20 blob-2" width="700" height="500" viewBox="0 0 700 500" fill="none" aria-hidden="true">
-    <path d="M560 80C640 160 620 280 520 340C420 400 300 420 200 360C100 300 40 160 120 80C200 0 420 0 560 80Z" fill="var(--accent-2)" opacity="0.08"></path>
-  </svg>
+<body>
 
-  <main class="max-w-5xl mx-auto px-6 py-12 lg:py-20">
-    <div class="bg-white shadow-lg rounded-2xl overflow-hidden border border-slate-100">
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 p-6 lg:p-10">
+  <!-- Floating Aura -->
+  <div class="aura-1"></div>
+  <div class="aura-2"></div>
 
-        <aside class="lg:col-span-1 space-y-6">
-          <div class="flex items-center gap-4">
-            <div id="avatar" class="w-20 h-20 rounded-xl flex items-center justify-center text-xl font-semibold text-white" style="background:linear-gradient(135deg,var(--accent-1),var(--accent-2))">DE</div>
-            <div>
-              <h1 id="name" class="text-2xl font-semibold">Nama Depan Nama Belakang</h1>
-              <p id="title" class="text-sm text-slate-500 mt-1">Posisi yang Dilamar — Contoh: Desainer Hijab</p>
-              <div id="location" class="text-xs text-slate-400 mt-1">Kota • Indonesia</div>
-            </div>
+  <!-- NAV -->
+  <header class="fixed left-0 right-0 top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="nav-glass glass flex items-center justify-between gap-4 py-3 px-4 mt-3">
+        <div class="flex items-center gap-3">
+          <div class="accent-pill">Daily Essential Style</div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <nav class="hidden md:flex gap-4 text-sm muted">
+            <!-- <a href="#about" class="hover:underline">Tentang</a> -->
+            <!-- <a href="#projects" class="hover:underline">Almamater</a> -->
+            <a href="#" class="hover:underline">Keindahan Adalah Kesempurnaan</a>
+          </nav>
+
+          <!-- Theme toggle -->
+          <div id="themeToggle" class="topbar-toggle btn-glass" aria-label="Toggle theme"
+            title="Toggle theme (light/dark)">
+            <svg id="iconSun" class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5" />
+            </svg>
+            <svg id="iconMoon" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" stroke-width="1.25"
+                fill="none" />
+            </svg>
+            <span class="text-sm muted hidden md:inline" id="themeLabel">Dark</span>
           </div>
-
-          <div class="space-y-3">
-            <div id="about" class="text-sm text-slate-600">Deskripsi singkat tentang kamu. Contoh: Saya desainer produk dengan 3 tahun pengalaman membuat koleksi hijab yang ramah pengguna dan estetis. Fokus pada kualitas jahit dan tren pasar.</div>
-          </div>
-
-          <div class="space-y-2">
-            <h3 class="text-sm font-medium text-slate-700">Contact</h3>
-            <a id="email" href="mailto:email@domain.com" class="block text-sm text-slate-600 hover:underline">📧 email@domain.com</a>
-            <a id="phone" href="tel:+6281234567890" class="block text-sm text-slate-600 hover:underline">📱 +62 812 3456 7890</a>
-            <a id="website" href="#" class="block text-sm text-slate-600 hover:underline">🔗 dailyessentialstyle.github.io/profile</a>
-          </div>
-
-          <div>
-            <h3 class="text-sm font-medium text-slate-700">Skills</h3>
-            <div id="skills" class="mt-2 flex flex-wrap gap-2">
-              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Desain</span>
-              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Photoshop</span>
-              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Ilustrasi</span>
-              <span class="text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700">Manajemen Produk</span>
-            </div>
-          </div>
-
-          <div class="flex gap-3 mt-2 no-print">
-            <button class="print-btn focus-ring px-4 py-2 rounded-lg text-sm font-semibold" onclick="window.print()" style="background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:white">Cetak / Simpan PDF</button>
-            <button class="copy-btn px-4 py-2 rounded-lg text-sm border border-slate-200" onclick="copyURL()">Copy Link</button>
-          </div>
-        </aside>
-
-        <section class="lg:col-span-3 space-y-6">
-
-          <div class="reveal p-4 lg:p-6 bg-white rounded-xl border border-slate-100">
-            <h2 class="text-lg font-semibold text-slate-800">Experience</h2>
-
-            <article class="mt-4 space-y-3">
-              <div class="p-4 rounded-lg bg-gradient-to-r from-slate-50 to-white border border-slate-100">
-                <h3 class="font-medium">Desainer Produk — Nama Perusahaan</h3>
-                <div class="text-xs text-slate-400">Jan 2022 — Sekarang • Kota</div>
-                <p class="text-sm text-slate-600 mt-2">Ringkasan tugas dan pencapaian (apa yang kamu lakukan dan hasilnya).</p>
-              </div>
-
-              <div class="p-4 rounded-lg bg-slate-50 border border-slate-100">
-                <h3 class="font-medium">Freelance — Desainer</h3>
-                <div class="text-xs text-slate-400">2019 — 2021</div>
-                <p class="text-sm text-slate-600 mt-2">Proyek-proyek penting: katalog, branding, photoshoot.</p>
-              </div>
-            </article>
-          </div>
-
-          <div class="reveal p-4 lg:p-6 bg-white rounded-xl border border-slate-100">
-            <h2 class="text-lg font-semibold text-slate-800">Education</h2>
-            <div class="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-100">
-              <h3 class="font-medium">Nama Universitas / Sekolah</h3>
-              <div class="text-xs text-slate-400">2015 — 2019</div>
-              <p class="text-sm text-slate-600 mt-2">Jurusan — Keterangan singkat.</p>
-            </div>
-          </div>
-
-          <div class="reveal p-4 lg:p-6 bg-white rounded-xl border border-slate-100">
-            <div class="flex items-center justify-between">
-              <h2 class="text-lg font-semibold text-slate-800">Portfolio</h2>
-              <div class="text-sm text-slate-500">Klik untuk lihat detail</div>
-            </div>
-
-            <div id="projects" class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            </div>
-          </div>
-
-          <footer class="text-sm text-slate-500">Ingin menampilkan QR di kartu nama? Ganti teks di field "website" jadi URL GitHub Pages kamu lalu gunakan layanan QR generator (banyak yang gratis) untuk membuat gambar QR. Contoh: https://dailyessentialstyle.github.io/profile</footer>
-        </section>
-
+        </div>
       </div>
     </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-5xl mx-auto px-4 pt-28 pb-20">
+
+    <!-- HERO -->
+    <section class="glass p-10 rounded-2xl overflow-hidden relative reveal" id="hero">
+      <div class="flex flex-col lg:flex-row items-center gap-8">
+        <!-- large centered photo (left on desktop) -->
+        <div class="flex-shrink-0 flex items-center justify-center w-full lg:w-auto">
+          <img src="assets/syafik.jpg" alt="Alfan" class="hero-img img-zoom">
+        </div>
+
+        <div class="flex-1 text-center lg:text-left">
+          <h1 class="text-4xl lg:text-5xl font-extrabold leading-tight mb-2">Syahifatul Fikri</h1>
+           <p class="muted text-lg mb-4">Divisi Pemasaran Digital dan Penggiat Konten</p>
+          <p class="muted text-md mb-4">Kepala Bidang Layanan Kreatif dan Konten Kreator</p>
+
+          <p class="text-sm muted max-w-2xl mx-auto lg:mx-0 mb-6">
+            Hi, saya Syahifatul Fikri, Kepala Bidang Layanan Kreatif dan Konten Kreator di Daily Essential Style
+            Indonesia. Dengan pengalaman lebih dari 4 tahun di bidang pembuatan konten dan layanan  kreatif, saya
+            berfokus pada pengembangan konten yang inovatif dan menarik untuk memperkuat kehadiran merek kami di
+            platform digital. Saya juga aktif dalam menciptakan strategi konten yang efektif untuk menjangkau audiens
+            kami, serta mengelola tim kreatif untuk menghasilkan karya yang berdampak.
+          </p>
+          <div class="flex justify-center lg:justify-start gap-3">
+            <!-- <a href="#" class="btn-glass">LinkedIn</a> -->
+            <button onclick="copyLink()" class="btn-glass">Salin Tautan Halaman Ini</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mengenai DES -->
+    <section id="about" class="mt-10 reveal">
+      <div class="glass p-8 rounded-2xl">
+        <h2 class="text-2xl font-semibold mb-3">Tentang DES</h2>
+        <p class="muted">DES (Daily Essential Style) merupakan salah satu merek kerudung di Indonesia yang berdiri sejak
+          2025. DES hadir untuk memberikan pengalaman dan peningkatan busana untuk Anda. Kami terus berinovasi untuk
+          memberikan kualitas produk terbaik untuk pelanggan kami dan selalu berkomitmen untuk membereikan pelayanan
+          berkualitas, berintegritas, dan nyaman bagi Anda.</p>
+      </div>
+    </section>
+
+    <!-- Almamater -->
+    <section id="projects" class="mt-8 reveal">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-semibold">Almamater</h2>
+        <div class="muted text-sm">Jenjang Pendidikan - dimulai dari tingkat SLTA Sederajat</div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- project card -->
+        <article class="glass p-4 rounded-2xl reveal">
+          <img src="assets/SMK.jpg" alt="almt1" class="rounded-xl mb-3" style="width:120px; height:auto;">
+          <h3 class="font-semibold">SMK YP 79 Majalaya (SLTA)</h3>
+          <p class="muted text-sm">Teknik Komputer dan Jaringan (TKJ)</p>
+          <p class="muted text-sm">Tahun Lulus : 2020</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="mt-10 reveal">
+      <div class="glass p-8 rounded-2xl">
+        <h2 class="text-2xl font-semibold mb-3">Kontak</h2>
+        <p>Jika Anda ingin menghubungi saya untuk keperluan profesional, kolaborasi, atau pertanyaan lainnya, silakan
+          gunakan informasi kontak di bawah ini:</p>
+
+        <br>
+
+        <p class="muted">Pos-el: <a href="#" class="hover:underline">syafik.marketing.des@outlook.com</a></p>
+        <p class="muted">Media WhatsApp: <a href="#" class="hover:underline">+62 85861562366</a></p>
+        <div class="mt-4 flex gap-3">
+          <a href="mailto:syafik.marketing.des@outlook.com" class="btn-glass">Kirim Surel</a>
+          <a href="https://wa.me/6285861562366" class="btn-glass">Media WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-12 text-sm muted text-center">© <span id="year"></span>Daily Essential Style . Hak Cipta Dilindungi Undang-Undang</footer>
   </main>
 
   <script>
-    const data = {
-      initials: 'DE',
-      name: 'DES — Daily Essential',
-      title: 'Founder & Product Designer',
-      location: 'Jakarta, Indonesia',
-      email: 'halo@dailyessentialstyle.com',
-      phone: '+62 812 3456 7890',
-      website: 'https://dailyessentialstyle.github.io/profile',
-      about: 'Saya membuat koleksi hijab dengan pendekatan fungsional dan estetis. Fokus pada material, jahitan, dan presentasi produk.',
-      skills: ['Desain Produk','Pattern Making','Branding','Photoshop','Adobe Illustrator'],
-      projects: [
-        {title:'Koleksi Hijab Satin 2025', desc:'Desain, sample, dan katalog produk.'},
-        {title:'Branding Toko Online', desc:'Konsep visual & assets promosi.'},
-        {title:'Lookbook Ramadan', desc:'Styling, foto, dan layout.'},
-      ]
+    // ---- Theme (auto + toggle) ----
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLabel = document.getElementById('themeLabel');
+    const iconSun = document.getElementById('iconSun');
+    const iconMoon = document.getElementById('iconMoon');
+
+    // determine initial theme
+    function getInitialTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      // follow system
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
 
-    document.getElementById('avatar').textContent = data.initials;
-    document.getElementById('name').textContent = data.name;
-    document.getElementById('title').textContent = data.title;
-    document.getElementById('location').textContent = data.location;
-    document.getElementById('email').textContent = '📧 ' + data.email; document.getElementById('email').href = 'mailto:' + data.email;
-    document.getElementById('phone').textContent = '📱 ' + data.phone; document.getElementById('phone').href = 'tel:' + data.phone.replaceAll(' ','');
-    document.querySelector('#website').textContent = '🔗 ' + data.website; document.querySelector('#website').href = data.website;
-    document.getElementById('about').textContent = data.about;
+    function applyTheme(t) {
+      if (t === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeLabel && (themeLabel.textContent = 'Light');
+        iconSun.classList.add('hidden'); iconMoon.classList.remove('hidden');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        themeLabel && (themeLabel.textContent = 'Dark');
+        iconSun.classList.remove('hidden'); iconMoon.classList.add('hidden');
+      }
+      localStorage.setItem('theme', t);
+    }
 
-    const skillsEl = document.getElementById('skills'); skillsEl.innerHTML = '';
-    data.skills.forEach(s=>{ const sp = document.createElement('span'); sp.className='text-xs px-3 py-1 rounded-full bg-slate-100 text-slate-700'; sp.textContent = s; skillsEl.appendChild(sp); });
+    // init
+    const initial = getInitialTheme();
+    applyTheme(initial);
 
-    const projectsEl = document.getElementById('projects'); projectsEl.innerHTML = '';
-    data.projects.forEach(p=>{
-      const card = document.createElement('a');
-      card.className = 'block p-4 rounded-xl border border-slate-100 bg-white hover:shadow-lg transition transform hover:-translate-y-1 focus-ring';
-      card.href = '#';
-      card.innerHTML = '<h4 class="font-medium text-slate-800">' + p.title + '</h4><p class="text-sm text-slate-500 mt-2">' + p.desc + '</p>';
-      projectsEl.appendChild(card);
+    // toggle
+    themeToggle.addEventListener('click', () => {
+      const current = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
     });
 
-    function copyURL(){
-      navigator.clipboard.writeText(data.website).then(()=>{
-        const btn = document.querySelector('.copy-btn');
-        btn.textContent = 'Link Disalin';
-        setTimeout(()=>btn.textContent = 'Copy Link',1500);
+    // react to system changes if user didn't pick explicitly
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      const saved = localStorage.getItem('theme');
+      if (!saved) applyTheme(e.matches ? 'dark' : 'light');
+    });
+
+    // ---- Reveal on scroll (IntersectionObserver) ----
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.14 });
+
+    revealEls.forEach(el => io.observe(el));
+
+    // ---- small helpers ----
+    function copyLink() {
+      navigator.clipboard.writeText(location.href).then(() => {
+        alert('Tautan disalin ke clipboard');
+      }).catch(() => { /* ignore */ });
     }
 
-    window.copyURL = copyURL;
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); } });
-    },{threshold:0.12});
-    reveals.forEach(r=>io.observe(r));
-
-    document.addEventListener('keydown',(e)=>{ if(e.key === 'Tab'){ document.body.classList.remove('no-focus') }});
-
+    // respect reduced motion: disable animations if user prefers reduced motion
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      document.querySelectorAll('.aura-1, .aura-2').forEach(n => n.style.animation = 'none');
+    }
   </script>
+
 </body>
+
 </html>
