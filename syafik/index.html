@@ -83,10 +83,12 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
     }
 
-    .spotlight-card:hover {
-      border-color: rgba(255, 105, 24, 0.3);
-      box-shadow: 0 12px 40px rgba(255, 105, 24, 0.06);
-      transform: translateY(-2px);
+    @media (hover: hover) {
+      .spotlight-card:hover {
+        border-color: rgba(255, 105, 24, 0.3);
+        box-shadow: 0 12px 40px rgba(255, 105, 24, 0.06);
+        transform: translateY(-2px);
+      }
     }
 
     .spotlight-card::before {
@@ -107,8 +109,10 @@
       opacity: 0;
     }
 
-    .spotlight-card:hover::before {
-      opacity: 1;
+    @media (hover: hover) {
+      .spotlight-card:hover::before {
+        opacity: 1;
+      }
     }
 
     .spotlight-card > * {
@@ -138,7 +142,7 @@
     /* MAC-STYLE ELASTIC DOCK (ReactBits) */
     .dock-container {
       position: fixed;
-      bottom: 24px;
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
       left: 50%;
       transform: translateX(-50%);
       z-index: 50;
@@ -146,22 +150,30 @@
       justify-content: center;
       pointer-events: none;
       width: max-content;
-      max-width: 90vw;
+      max-width: 95vw;
     }
 
     .dock {
       display: flex;
       align-items: flex-end;
-      gap: 12px;
-      padding: 10px 18px;
+      gap: 6px;
+      padding: 6px 10px;
       background: var(--dock-bg);
       backdrop-filter: blur(24px) saturate(120%);
       -webkit-backdrop-filter: blur(24px) saturate(120%);
       border: 1px solid var(--card-border);
-      border-radius: 30px;
+      border-radius: 20px;
       pointer-events: auto;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
       transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 640px) {
+      .dock {
+        gap: 12px;
+        padding: 10px 18px;
+        border-radius: 30px;
+      }
     }
 
     .dock-item {
@@ -169,9 +181,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       color: var(--text-main);
@@ -182,11 +194,21 @@
       cursor: pointer;
     }
 
-    .dock-item:hover {
-      background: #ff6918;
-      color: #ffffff;
-      transform: translateY(-6px);
-      border-color: rgba(255, 105, 24, 0.4);
+    @media (min-width: 640px) {
+      .dock-item {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+      }
+    }
+
+    @media (hover: hover) {
+      .dock-item:hover {
+        background: #ff6918;
+        color: #ffffff;
+        transform: translateY(-6px);
+        border-color: rgba(255, 105, 24, 0.4);
+      }
     }
 
     .dock-tooltip {
@@ -209,9 +231,11 @@
                   transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .dock-item:hover .dock-tooltip {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    @media (hover: hover) {
+      .dock-item:hover .dock-tooltip {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
     }
 
     /* MAGNETIC INTERACTIVE BUTTONS */
@@ -272,29 +296,29 @@
   <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
   <!-- Content Container -->
-  <main class="relative z-10 max-w-5xl mx-auto px-4 pt-10 pb-32">
+  <main class="relative z-10 max-w-5xl mx-auto px-4 pt-8 md:pt-12 pb-36">
     
     <!-- Top Header -->
-    <header class="flex justify-between items-center mb-10 reveal-load" style="animation-delay: 0.1s;">
+    <header class="flex flex-col sm:flex-row items-center justify-between gap-3 mb-8 md:mb-12 reveal-load" style="animation-delay: 0.1s;">
       <div class="flex items-center gap-3">
         <span class="inline-block w-3.5 h-3.5 bg-brand rounded-full animate-ping"></span>
         <div class="px-3.5 py-1 text-xs font-semibold uppercase tracking-wider rounded-full bg-brand/10 text-brand border border-brand/20 backdrop-blur-sm">
           DES Profile Hub
         </div>
       </div>
-      <div class="text-xs font-medium tracking-wide text-gray-500 dark:text-gray-400">
+      <div class="text-xs font-medium tracking-wide text-gray-500 dark:text-gray-400 text-center sm:text-right">
         "Keindahan Adalah Kesempurnaan"
       </div>
     </header>
 
-    <!-- BENTO GRID SYSTEM -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- BENTO GRID SYSTEM (Ultra Responsive Layout) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <!-- CARD 1: HERO PROFILE (Spans 2 cols, 2 rows on desktop) -->
-      <section class="spotlight-card md:col-span-2 md:row-span-2 p-8 lg:p-10 flex flex-col justify-between reveal-load" style="animation-delay: 0.2s;" id="profile">
+      <!-- CARD 1: HERO PROFILE (Spans 2 cols, 2 rows on lg desktop, 2 cols on sm tablet, 1 col on mobile) -->
+      <section class="spotlight-card sm:col-span-2 lg:row-span-2 p-5 sm:p-8 lg:p-10 flex flex-col justify-between reveal-load" style="animation-delay: 0.2s;" id="profile">
         <div>
           <!-- Status Pill & Avatar Row -->
-          <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
             <div class="relative flex-shrink-0">
               <div class="pulse-ring w-32 h-32 -m-1"></div>
               <img src="assets/syafik.jpg" alt="Syahifatul Fikri" class="w-28 h-28 rounded-2xl object-cover border-2 border-brand/20 shadow-2xl relative z-10">
@@ -304,7 +328,7 @@
                 <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
                 Divisi Pemasaran Digital dan Penggiat Konten
               </div>
-              <h1 class="text-3xl lg:text-4xl font-extrabold font-outfit tracking-tight mb-1.5 text-gray-900 dark:text-white">
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold font-outfit tracking-tight mb-1.5 text-gray-900 dark:text-white">
                 Syahifatul Fikri
               </h1>
               <p class="text-brand font-medium text-sm lg:text-base">
@@ -314,7 +338,7 @@
           </div>
 
           <!-- Description Capsule -->
-          <div class="space-y-4 text-sm lg:text-base leading-relaxed text-gray-600 dark:text-gray-300">
+          <div class="space-y-4 text-xs sm:text-sm lg:text-base leading-relaxed text-gray-600 dark:text-gray-300">
             <p>
               Hi, saya <span class="font-semibold text-gray-900 dark:text-white">Syahifatul Fikri</span>, Kepala Bidang Layanan Kreatif dan Konten Kreator di Daily Essential Style Indonesia.
             </p>
@@ -326,10 +350,10 @@
 
         <!-- Action Panel -->
         <div class="mt-8 pt-6 border-t border-gray-100 dark:border-gray-800 flex flex-wrap gap-4 items-center justify-between">
-          <button onclick="copyLink()" class="magnetic-btn px-5 py-2.5 rounded-xl bg-brand text-white font-semibold text-xs tracking-wide shadow-lg shadow-brand/20 hover:shadow-brand/30 hover:bg-brand-dark transition-all duration-300">
+          <button onclick="copyLink()" class="magnetic-btn w-full sm:w-auto px-5 py-2.5 rounded-xl bg-brand text-white font-semibold text-xs tracking-wide shadow-lg shadow-brand/20 hover:shadow-brand/30 hover:bg-brand-dark transition-all duration-300">
             Salin Tautan Halaman Ini
           </button>
-          <div class="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-2">
+          <div class="text-xs text-gray-400 dark:text-gray-500 flex items-center gap-2 mx-auto sm:mx-0">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
             dailyessentialstyle.id
           </div>
@@ -337,7 +361,7 @@
       </section>
 
       <!-- CARD 2: REAL-TIME TIMEZONE CLOCK & STATUS -->
-      <section class="spotlight-card p-6 flex flex-col justify-between reveal-load" style="animation-delay: 0.3s;">
+      <section class="spotlight-card p-5 sm:p-6 lg:p-8 flex flex-col justify-between reveal-load" style="animation-delay: 0.3s;">
         <div>
           <div class="flex items-center justify-between mb-4">
             <h3 class="font-outfit font-bold tracking-tight text-gray-800 dark:text-gray-200">Local Timezone</h3>
@@ -345,7 +369,7 @@
           </div>
           <!-- Clock visualization -->
           <div class="my-6 text-center py-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 relative overflow-hidden">
-            <div class="text-4xl font-extrabold font-outfit tracking-wider text-brand dark:text-brand-light" id="digital-clock">
+            <div class="text-3xl sm:text-4xl font-extrabold font-outfit tracking-wider text-brand dark:text-brand-light" id="digital-clock">
               00:00:00
             </div>
             <div class="text-[10px] font-semibold tracking-widest text-gray-400 dark:text-gray-500 mt-1 uppercase" id="clock-period">
@@ -361,8 +385,8 @@
         </div>
       </section>
 
-      <!-- CARD 3: CORE SKILLS (Spans 1 col) -->
-      <section class="spotlight-card p-6 flex flex-col justify-between reveal-load" style="animation-delay: 0.4s;" id="skills">
+      <!-- CARD 3: CORE SKILLS (Spans 1 col on all devices) -->
+      <section class="spotlight-card p-5 sm:p-6 lg:p-8 flex flex-col justify-between reveal-load" style="animation-delay: 0.4s;" id="skills">
         <div>
           <div class="flex items-center justify-between mb-5">
             <h3 class="font-outfit font-bold tracking-tight text-gray-800 dark:text-gray-200">Keahlian Utama</h3>
@@ -394,14 +418,14 @@
         </div>
       </section>
 
-      <!-- CARD 4: TENTANG DES (Spans 1 col) -->
-      <section class="spotlight-card p-6 flex flex-col justify-between reveal-load" style="animation-delay: 0.5s;" id="about-des">
+      <!-- CARD 4: TENTANG DES (Spans 1 col on all devices) -->
+      <section class="spotlight-card p-5 sm:p-6 lg:p-8 flex flex-col justify-between reveal-load" style="animation-delay: 0.5s;" id="about-des">
         <div>
           <div class="flex items-center gap-2 mb-4">
             <span class="inline-flex w-7 h-7 rounded-lg items-center justify-center bg-brand/10 text-brand border border-brand/20 font-outfit font-black text-xs">DES</span>
             <h3 class="font-outfit font-bold tracking-tight text-gray-800 dark:text-gray-200">Tentang DES</h3>
           </div>
-          <p class="text-xs lg:text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+          <p class="text-xs sm:text-sm leading-relaxed text-gray-600 dark:text-gray-300">
             DES (Daily Essential Style) merupakan salah satu merek kerudung di Indonesia yang berdiri sejak 2025. DES hadir untuk memberikan pengalaman dan peningkatan busana untuk Anda. Kami terus berinovasi untuk memberikan kualitas produk terbaik untuk pelanggan kami dan selalu berkomitmen untuk membereikan pelayanan berkualitas, berintegritas, dan nyaman bagi Anda.
           </p>
         </div>
@@ -410,8 +434,8 @@
         </div>
       </section>
 
-      <!-- CARD 5: ALMAMATER (Spans 2 cols on desktop) -->
-      <section class="spotlight-card md:col-span-2 p-6 lg:p-8 flex flex-col justify-between reveal-load" style="animation-delay: 0.6s;" id="education">
+      <!-- CARD 5: ALMAMATER (Spans 2 cols on tablet & desktop) -->
+      <section class="spotlight-card sm:col-span-2 p-5 sm:p-8 flex flex-col justify-between reveal-load" style="animation-delay: 0.6s;" id="education">
         <div>
           <div class="flex items-center justify-between mb-6">
             <div>
@@ -440,14 +464,14 @@
         </div>
       </section>
 
-      <!-- CARD 6: CONTACT & CHANNELS (Spans 3 cols on desktop) -->
-      <section class="spotlight-card md:col-span-3 p-8 lg:p-10 reveal-load" style="animation-delay: 0.7s;" id="contact">
+      <!-- CARD 6: CONTACT & CHANNELS (Spans all columns responsive) -->
+      <section class="spotlight-card sm:col-span-2 lg:col-span-3 p-5 sm:p-8 lg:p-10 reveal-load" style="animation-delay: 0.7s;" id="contact">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
           <div>
-            <h3 class="font-outfit font-bold text-2xl tracking-tight text-gray-850 dark:text-white mb-2">
+            <h3 class="font-outfit font-bold text-xl sm:text-2xl tracking-tight text-gray-850 dark:text-white mb-2">
               Mari Berkolaborasi!
             </h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300 max-w-xl">
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 max-w-xl">
               Jika Anda ingin menghubungi saya untuk keperluan profesional, kolaborasi, atau pertanyaan lainnya, silakan gunakan informasi kontak di bawah ini:
             </p>
           </div>
@@ -459,7 +483,7 @@
             </a>
             <!-- WhatsApp Action -->
             <a href="https://wa.me/6285861562366" target="_blank" class="magnetic-btn w-full sm:w-auto px-6 py-3.5 text-center font-bold text-sm tracking-wide rounded-2xl bg-brand text-white shadow-lg shadow-brand/20 hover:bg-brand-dark transition-all duration-300">
-              <svg class="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.022-.015-.022-.015-.434-.252-.107-.06-.214-.12-.321-.18l-.324-.18c-.352-.196-.64-.263-.865-.052l-.372.372c-.12.12-.224.238-.309.324l-.101.101c-.131.131-.247.164-.479.037a5.556 5.556 0 0 1-1.396-.94 5.373 5.373 0 0 1-1.026-1.127c-.122-.213-.017-.329.079-.44l.215-.246.068-.08c.1-.115.158-.231.066-.415-.045-.09-.136-.282-.227-.474l-.226-.475c-.2-.423-.424-.423-.623-.423H11c-.2 0-.46.077-.7.319a2.915 2.915 0 0 0-.915 2.162c0 1.25.91 2.458 1.036 2.627a9.382 9.382 0 0 0 3.593 3.17c1.884.73 2.27.585 3.084.51.9-.083 2.164-.883 2.464-1.748.3-.865.3-1.61.21-1.748-.09-.137-.329-.22-.505-.302zM12 2A10 10 0 0 0 2 12a9.9 9.9 0 0 0 1.5 5.25L2 22l4.9-1.45A9.9 9.9 0 0 0 12 22a10 10 0 0 0 10-10A10 10 0 0 0 12 2z"/></svg>
+              <svg class="w-4 h-4 mr-2 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.022-.015-.022-.015-.434-.252-.107-.06-.214-.12-.321-.18l-.324-.18c-.352-.196-.64-.263-.865-.052l-.372.372c-.12.12-.224.238-.309.324l-.101.101c-.131.131-.247.164-.479.037a5.556-.94 5.373-1.127c-.122-.213-.017-.329.079-.44l.215-.246.068-.08c.1-.115.158-.231.066-.415-.045-.09-.136-.282-.227-.474l-.226-.475c-.2-.423-.424-.423-.623-.423H11c-.2 0-.46.077-.7.319a2.915 2.915 0 0 0-.915 2.162c0 1.25.91 2.458 1.036 2.627a9.382 9.382 0 0 0 3.593 3.17c1.884.73 2.27.585 3.084.51.9-.083 2.164-.883 2.464-1.748.3-.865.3-1.61.21-1.748-.09-.137-.329-.22-.505-.302zM12 2A10 10 0 0 0 2 12a9.9 9.9 0 0 0 1.5 5.25L2 22l4.9-1.45A9.9 9.9 0 0 0 12 22a10 10 0 0 0 10-10A10 10 0 0 0 12 2z"/></svg>
               Hubungi via WhatsApp
             </a>
           </div>
@@ -693,9 +717,9 @@
       }
     }
 
+    // Adapt particle counts based on viewport size for maximum framerate
     function initParticles() {
       particlesArray = [];
-      // Adjust particle counts based on viewport size for maximum framerate
       const numberOfParticles = (canvas.width * canvas.height) / 16000;
       const count = Math.min(numberOfParticles, window.innerWidth < 768 ? 25 : 60);
 
@@ -781,11 +805,11 @@
     const dockItems = document.querySelectorAll('.dock-item');
 
     document.addEventListener('mousemove', (e) => {
-      if (window.innerWidth < 768) {
+      if (window.innerWidth < 640) {
         // Keep standard size on small screens
         dockItems.forEach(item => {
-          item.style.width = '48px';
-          item.style.height = '48px';
+          item.style.width = '38px';
+          item.style.height = '38px';
         });
         return;
       }
@@ -821,8 +845,9 @@
     // Reset size when mouse leaves viewport
     document.addEventListener('mouseleave', () => {
       dockItems.forEach(item => {
-        item.style.width = '48px';
-        item.style.height = '48px';
+        const standardSize = window.innerWidth < 640 ? '38px' : '48px';
+        item.style.width = standardSize;
+        item.style.height = standardSize;
       });
     });
 
